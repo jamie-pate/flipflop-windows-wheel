@@ -71,6 +71,10 @@ namespace WindowsFormsApplication1 {
                     }
                 }
             }
+            notifyIcon1.ShowBalloonTip(99999999);
+            try {
+                listView1.Items.OfType<ListViewItem>().Last().EnsureVisible();
+            } catch { }
         }
     }
 }
