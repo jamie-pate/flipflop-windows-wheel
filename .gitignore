@@ -1,0 +1,5 @@
+obj
+*.suo
+/bin/Debug/FlipWheel.vshost.exe.manifest
+/bin/Debug/FlipWheel.pdb
+/bin/Debug/FlipWheel.vshost.exe
