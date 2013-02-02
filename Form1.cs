@@ -25,6 +25,9 @@ namespace WindowsFormsApplication1 {
                 this.Close();
                 Application.Exit();
             }
+            for(int i = 0; i < cbl_names.Items.Count;++i) {
+                cbl_names.SetItemChecked(i, true);
+            }
         }
         private static bool RunElevated(string fileName)
         {
@@ -62,8 +65,12 @@ namespace WindowsFormsApplication1 {
                             using (RegistryKey device2 = device.OpenSubKey(devicekn2,false)) {
                                 using (RegistryKey devparam = device2.OpenSubKey("Device Parameters",true)) {
                                     if (devparam != null) {
-                                        devparam.SetValue("FlipFlopWheel", p ? 1 : 0,RegistryValueKind.DWord);
-                                        listView1.Items.Add((string)device2.GetValue("DeviceDesc")).SubItems.Add(p ? "Flipped" : "Normal");
+                                        foreach(string name in cbl_names.CheckedItems.OfType<String>()) {
+                                            if (devparam.GetValue(name, null) != null) {
+                                                devparam.SetValue(name, p ? 1 : 0, RegistryValueKind.DWord);
+                                                listView1.Items.Add((string)device2.GetValue("DeviceDesc")).SubItems.AddRange(new String[]{name,p ? "Flipped" : "Normal"});
+                                            }
+                                        }
                                     }
                                 }
                             }
