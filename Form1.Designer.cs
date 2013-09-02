@@ -116,7 +116,6 @@
             this.cbl_names.Size = new System.Drawing.Size(288, 52);
             this.cbl_names.TabIndex = 4;
             this.cbl_names.ThreeDCheckBoxes = true;
-            this.cbl_names.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // notifyIcon1
             // 
