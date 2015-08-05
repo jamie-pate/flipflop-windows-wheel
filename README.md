@@ -6,3 +6,5 @@ C# dotnet4 application to set or remove the 'flipflopwheel' registry setting in 
 
 binary:
 https://github.com/jamie-pate/flipflop-windows-wheel/blob/master/bin/Debug/FlipWheel.exe
+
+NOTE: *Works in Windows 10*
