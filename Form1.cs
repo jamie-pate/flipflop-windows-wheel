@@ -73,7 +73,7 @@ namespace WindowsFormsApplication1 {
                 }
             }
             if (filter != null) {
-                return flips.Where(f=>f.name.Contains(filter)).ToArray();
+                return flips.Where(f=>f.deviceDesc.Contains(filter)).ToArray();
             }
             return flips.ToArray();
         }
@@ -110,13 +110,14 @@ namespace WindowsFormsApplication1 {
             notifyIcon1.ShowBalloonTip(99999999);
         }
     }
-    
+
     public class Flippable {
         public Flippable(string[] keyPath, RegistryKey deviceKey, RegistryKey devparam, Timer timer) {
             this._keyPath = keyPath;
             IEnumerable<bool?> flipValues = Flippable.valueNames
                 .Select(v => onlyIntBool(devparam.GetValue(v, null)));
-            this.name = (string)deviceKey.GetValue("DeviceDesc");
+            this.name = (string)deviceKey.GetValue("Driver", defaultValue: "No driver found");
+            this.deviceDesc = (string)deviceKey.GetValue("DeviceDesc");
             this._vertical = flipValues.ElementAt(0);
             this._horizontal = flipValues.ElementAt(1);
             this._timer = timer;
@@ -131,6 +132,7 @@ namespace WindowsFormsApplication1 {
         public static string[] valueNames = new string[] { "FlipFlopWheel", "FlipFlopHScroll" };
 
         public string name { get; private set; }
+        internal string deviceDesc { get; private set; }
         private string[] _keyPath;
         private bool? _vertical;
         private bool? _horizontal;
